@@ -88,7 +88,8 @@ pins DAC0 and DAC1 are "true" analog
 
 The dual MC33926 board has a large number of configuration pins. Many of these are easily set using a jumper with the onboard VDD or GND connections. But other optional configurations can require a large number of VDD or GND connections.
 
-This [breakout board](schematics) provides eight VDD and eight GND connections for various settings. The board also provides connections for a four-wire ribbon cable to the dual IN1 and IN2 connections.
+This [dual breakout board](schematics) provides eight VDD and eight GND connections for various settings. The board also provides connections for a four-wire ribbon cable to the dual IN1 and IN2 connections.
 
 [Breakout Board](docs/mc33926_breakout1.jpg)
+
 [Example implementation](docs/mc33926_breakout2.jpg)
