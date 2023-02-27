@@ -30,6 +30,8 @@ Returns a float value representing the current in milliamps.
 
 `float getCurrent()`
 
+Note, this feature is currently untested.
+
 ## Status Flag
 
 You can actively read the status flag sense pin at-will or register an interrupt handler to execute upon a status change event. Either must be invoked at setup time.
@@ -81,3 +83,12 @@ Due pwm pins:
 use analogWriteResolution to set higher resolution. i.e. "12" for 12-bit -> 4096bit resolution
 
 pins DAC0 and DAC1 are "true" analog
+
+# MC33926 Breakout
+
+The dual MC33926 board has a large number of configuration pins. Many of these are easily set using a jumper with the onboard VDD or GND connections. But other optional configurations can require a large number of VDD or GND connections.
+
+This [breakout board](schematics) provides eight VDD and eight GND connections for various settings. The board also provides connections for a four-wire ribbon cable to the dual IN1 and IN2 connections.
+
+[Breakout Board](docs/mc33926_breakout1.jpg)
+[Example implementation](docs/mc33926_breakout2.jpg)
