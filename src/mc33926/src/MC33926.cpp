@@ -15,6 +15,26 @@ MC33926::MC33926(
         this->init();
 }
 
+MC33926::MC33926(
+    int in1Pin,
+    int in2Pin,
+    int writeResolution)
+{
+
+    MC33926(in1Pin, in2Pin);
+
+    this->m_max_pwm_output = DEFAULT_MAX_12_BIT_SPEED_VALUE;
+    this->m_min_pwm_output = DEFAULT_MIN_12_BIT_SPEED_VALUE;
+
+    this->m_write_resolution = writeResolution;
+
+#if defined(__SAM3X8E__)
+    analogWriteResolution(writeResolution);
+#endif // __SAM3X8E
+
+}
+
+
 void MC33926::init() {
 
     pinMode(this->m_in1_pin, OUTPUT);

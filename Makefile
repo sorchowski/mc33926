@@ -55,3 +55,5 @@ zip:
 	# ignore the output of rm on the next line
 	-rm $(BUILD_DIR)/$(LIBRARY_NAME).zip
 	(cd src/ && zip -FSr - $(LIBRARY_NAME)) > $(BUILD_DIR)/$(LIBRARY_NAME).zip
+
+install-win: zip install-winlib

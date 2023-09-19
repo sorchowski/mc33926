@@ -41,6 +41,8 @@
 #define PIN_NOT_CONNECTED -1
 #define DEFAULT_MAX_SPEED_VALUE 255
 #define DEFAULT_MIN_SPEED_VALUE -255
+#define DEFAULT_MAX_12_BIT_SPEED_VALUE 4095
+#define DEFAULT_MIN_12_BIT_SPEED_VALUE -4095
 
 class MC33926 {
 
@@ -48,6 +50,20 @@ class MC33926 {
         MC33926(
             int in1Pin,
             int in2Pin
+        );
+
+        // See https://www.arduino.cc/reference/en/language/functions/zero-due-mkr-family/analogwriteresolution/
+        // for details on the analogWriteResolution() method available in the Due
+        // and other boards. The maximum number of bits for the write resolution is
+        // 12 for the Due. With a value of 12, possible values for analogWrite are
+        // between 0 and 4095. Sketches utilizing this constructor will function as
+        // expected when compiling for the Arduino Due target; otherwise, the call
+        // to analogWriteResolution() is not executed.
+
+        MC33926(
+            int in1Pin,
+            int in2Pin,
+            int writeResolution // num bits max is 12
         );
 
         /**
@@ -98,6 +114,8 @@ class MC33926 {
         int m_max_pwm_output;       // The maximum value to use when setting pwm signals
         int m_min_pwm_output;       // The minimum value to use when setting pwm signals. Typically
                                     // the negative of m_max_pwm_output
+
+        int m_write_resolution;     // The number of bits to use when invoking analogWriteResolution()
 };
 
 #endif // MC33926_H

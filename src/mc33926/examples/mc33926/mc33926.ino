@@ -5,7 +5,9 @@
 #define IN1_PIN 6
 #define IN2_PIN 9
 
-MC33926 motorController(IN1_PIN, IN2_PIN);
+MC33926 motorController(IN1_PIN, IN2_PIN, 12);
+
+// 4095 is the maximum value for a 12-bit pwm signal on the Due
 
 void setup() {
   motorController.setSpeed(100);
