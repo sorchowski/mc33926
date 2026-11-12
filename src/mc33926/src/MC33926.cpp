@@ -1,4 +1,4 @@
-#include <arduino.h>
+#include <Arduino.h>
 #include "MC33926.h"
 
 MC33926::MC33926(
@@ -9,8 +9,10 @@ MC33926::MC33926(
         this->m_in2_pin = in2Pin;
         this->m_current_sense_pin = PIN_NOT_CONNECTED;
         this->m_status_flag_pin = PIN_NOT_CONNECTED;
+        this->m_reference_voltage = DEFAULT_REFERENCE_VOLTAGE;
         this->m_max_pwm_output = DEFAULT_MAX_SPEED_VALUE;
         this->m_min_pwm_output = DEFAULT_MIN_SPEED_VALUE;
+        this->m_write_resolution = DEFAULT_WRITE_RESOLUTION;
 
         this->init();
 }
@@ -19,19 +21,22 @@ MC33926::MC33926(
     int in1Pin,
     int in2Pin,
     int writeResolution)
+    : MC33926(in1Pin, in2Pin)
 {
-
-    MC33926(in1Pin, in2Pin);
-
-    this->m_max_pwm_output = DEFAULT_MAX_12_BIT_SPEED_VALUE;
-    this->m_min_pwm_output = DEFAULT_MIN_12_BIT_SPEED_VALUE;
-
-    this->m_write_resolution = writeResolution;
-
 #if defined(__SAM3X8E__)
-    analogWriteResolution(writeResolution);
-#endif // __SAM3X8E
+    // Only the Due path changes the PWM resolution; other boards keep the
+    // 8-bit defaults set by the delegated constructor, since analogWrite()
+    // there only accepts 0-255.
+    int bits = constrain(writeResolution, 1, MAX_WRITE_RESOLUTION);
 
+    this->m_write_resolution = bits;
+    this->m_max_pwm_output = (1 << bits) - 1;
+    this->m_min_pwm_output = -this->m_max_pwm_output;
+
+    analogWriteResolution(bits);
+#else
+    (void)writeResolution;
+#endif // __SAM3X8E__
 }
 
 
