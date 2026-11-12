@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "MC33926.h"
+#include "mc33926.h"
 
 MC33926::MC33926(
     int in1Pin,

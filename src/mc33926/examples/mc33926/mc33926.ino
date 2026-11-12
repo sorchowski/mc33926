@@ -1,4 +1,4 @@
-#include <MC33926.h>
+#include <mc33926.h>
 
 //https://www.pololu.com/product/1213
 
